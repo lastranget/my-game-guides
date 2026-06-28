@@ -17,6 +17,12 @@ HTML game guides** plus a browsable index, deployed as a GitHub Pages site
   flow, the OLED-black AYN Thor visual style (palette, collapsible TOC, overflow guards,
   auto-hide chrome), validation steps, and the fighting-game input glyphs. **Read it before
   creating or editing a guide**, and keep new guides consistent with it.
+- **`docs/`** — internal design notes. **`input-notation.md`** is the **canonical fighting-game
+  input-notation scheme**: facing-relative text tokens (`QCF`, `DP`, `[B]F`, `F-DF-D`…) that
+  replaced the old directional arrows (arrows are only correct while a character faces right).
+  Every fighting-game guide renders move inputs with these tokens and carries a **notation ledger**
+  near the top mapping the tokens it uses. New/edited fighting-game guides must follow it (see also
+  §11 of the playbook).
 - **`index.html`** — the landing page (see below).
 - **`manifest.json`** — fallback file list for the index (see below).
 - **`README.md`** — short public overview.
