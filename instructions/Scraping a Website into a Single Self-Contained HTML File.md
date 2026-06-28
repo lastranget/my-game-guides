@@ -45,11 +45,21 @@ The output must be **portable**: open it from a file with no network, no sibling
 **AGGREGATE mode** (author a new guide from sources):
 
 1. **Find the sources** — the relevant pages/FAQs (often several per topic). Same Cloudflare-bypass tooling (§2, §4).
-2. **Scrape them as plain text to read** — you don't need the DOM or images; you need the *prose/data*. (GameFAQs guide text lives in `.faqtext`; pull it, save to files, read them.)
+2. **Scrape them as plain text to read** — you don't need the DOM or images; you need the *prose/data*. (GameFAQs prose lives in `<pre id="faqtext">`/`.faqtext`; but **GameFAQs is Cloudflare-walled — pull each FAQ via the Wayback Machine**, see §4. Save to files, read them. The user often hands you the exact FAQ URLs/ids — read *all* of them.)
 3. **Read & reconcile** — extract the facts you need (movelists, combos, mechanics, strategy), cross-check sources, and **correct their errors**.
 4. **Decide the audience & structure** — e.g. for a beginner: **universal preface (how the *whole game* works)** → fundamentals → how-to → learning path → tiered combos → reference → one-screen card. Confirm any choice that pervades the output (e.g. button mapping) with `AskUserQuestion`. Even a guide scoped to one character or team **must** open with the game-wide preface (see callout below).
 5. **Author** the HTML with a generator (data structures → repeated components); build custom glyphs/SVGs (§11) as needed.
 6. **Validate** the same way (anchors, overflow, one-screen fit, render-check) — §9.
+
+> [!tip] One subject → a companion *set* of guides, not one giant file
+> A team/character often warrants **several standalone guides**. This repo's Cammy/BB Hood/Cyclops set is
+> **beginner** (controls, fundamentals, basic combos), a **combo dojo** (every combo, grouped + ID'd, with
+> single-screen practice cards), and **advanced** (strengths/weaknesses, assists, neutral, defense,
+> meter/DHC, mind-games, matchups, mistakes, boss). Each is self-contained with **no cross-file links** —
+> name siblings in plain text only. Share one generator (`gen.py` glyphs + a combo DSL), one
+> `style.css`/`app.js`, and one `refs.py`, so the set stays visually identical and each guide carries the
+> same **References & sources** section (§9). Build later guides by *reusing* the first guide's components,
+> not re-deriving them.
 
 > [!important] A character/team guide must still teach the *whole game* up front
 > "Self-contained" means **the reader needs nothing else to play** — not just to play the chosen character. So even when the scope is one character or one team, **prefix the guide with a brief, complete overview of everything required to play the game**: the full control scheme **and every universal/system mechanic**, each with its input and a one-line "what it does." Don't stop at the character's own moves.
@@ -113,6 +123,21 @@ const browser = await puppeteer.launch({
 
 > [!warning] Sandboxed Chromium can't read your scratch dir
 > A snap/apparmor-confined Chromium often **cannot open `file:///tmp/...`**. For screenshot/render checks of local output, copy the file under `$HOME` first (e.g. `~/_preview.html`) and load that. Live `https://` URLs are fine.
+
+> [!warning] Cloudflare-walled sources (GameFAQs) → go through the Wayback Machine
+> Some sources sit behind **Cloudflare** (e.g. **GameFAQs**): `curl`, the harness `WebFetch`, **and**
+> even headless `chromium --dump-dom` all get the **"Just a moment…"** JS-challenge page, not the
+> content. The reliable bypass is the **Internet Archive** (not Cloudflare-protected). Gotcha: the
+> harness `WebFetch` *refuses* `web.archive.org`, but **Bash `curl` reaches `archive.org` fine.** Recipe:
+> ```bash
+> # 1) find the closest snapshot via the availability API (returns JSON with the snapshot URL+timestamp)
+> curl -s "https://archive.org/wayback/available?url=<original-url>"
+> # 2) fetch the RAW archived page — the `id_` after the timestamp strips the Wayback toolbar/wrappers
+> curl -sA "Mozilla/5.0 …Chrome/120 Safari/537.36" "http://web.archive.org/web/<TS>id_/https://<original-url>"
+> ```
+> A FAQ id may be archived under a **different platform path** than the one you have (e.g. a Dreamcast
+> id only archived under the `arcade`/`ps2` URL) — loop over platform paths until one returns a snapshot.
+> GameFAQs FAQ prose lives in `<pre id="faqtext">` / `<div class="faqtext">`; grab that, strip tags, read it.
 
 ---
 
@@ -329,7 +354,9 @@ Inline the CSS in a `<style>` tag and the JS (expand-all + auto-hide) in a `<scr
 ```python
 # Broken anchors: every href="#x" must have a matching id="x" (browsers
 # percent-decode fragments, so also test the decoded form).
-# Cross-file links: in a "standalone" file, the only ...html links allowed are EXTERNAL (http).
+# Off-file links: in a "standalone" file the only allowed off-file links are EXTERNAL http(s) —
+#   including a "References & sources" section citing the source FAQs. Cross-FILE *.html links are
+#   banned; the self-containment audit must WHITELIST those citation hosts (don't flag them as leaks).
 # Image integrity: decode every data:image; none should be malformed or single-color (blank).
 ```
 
@@ -338,6 +365,8 @@ Inline the CSS in a `<style>` tag and the JS (expand-all + auto-hide) in a `<scr
 - Per-page captured image count `==` live count for image-heavy pages.
 - **No horizontal overflow** on the narrow screen: at 411px wide, `document.documentElement.scrollWidth === clientWidth` (no swipe-into-blank-space).
 - Render-check at **411×472** and **853×480** viewports (copy file under `$HOME` first, screenshot via puppeteer) and actually *look*: black background is `rgb(0,0,0)`, TOC/dropdowns are differentiated, TOC collapses, boards wrap, nothing overlays the TOC.
+- **External citation links are allowed** (a References section linking the source FAQs). Whitelist those hosts in the self-containment audit and only flag *other* `http/file/local` refs as asset leaks — and confirm `scratchpad`/`/tmp` paths never leaked into the output.
+- **One-screen cards fit the budget**: at 411px each `section.screenfit` must measure `h2-top → section-bottom ≤ ~418px` (viewport 472 − the 54px `scroll-padding-top`). For paginated combo cards, chunk by a weight budget (short=1, medium=2, long=3 *action* pieces; ~6/screen fits) and **measure every page** in puppeteer, then tune the budget. The wide-screen "all-three" trio card is allowed to exceed this (it targets the 853px top screen, ~≤426px there).
 
 > [!note] Honest reporting
 > A puppeteer "N-1 of N images loaded" is usually a render-timing artifact, not corruption — confirm with the PIL decode audit before claiming completeness, and say which check you trust.
@@ -363,6 +392,11 @@ Inline the CSS in a `<style>` tag and the JS (expand-all + auto-hide) in a `<scr
 - [ ] OLED target → force black `#000` + white text; differentiate only TOC/dropdowns/code; 1px rings not shadows. ➕ 2026-06-25
 - [ ] Auto-hide the header + back-to-top on scroll-down, reveal on scroll-up (`body.hide-chrome` toggle). ➕ 2026-06-25
 - [ ] Verify captured counts vs live; audit for blank images; confirm `scrollWidth==clientWidth` at 411px. ➕ 2026-06-25
+- [ ] Cloudflare-walled source (GameFAQs) → fetch via the **Wayback Machine** (`archive.org` availability API + raw `…<TS>id_/…`); harness `WebFetch` refuses archive.org but Bash `curl` works; fall back across platform paths for an id. ➕ 2026-06-28
+- [ ] One subject can be a **companion set** (beginner / combo / advanced) — separate standalone files, no cross-file links, shared generator + `style.css`/`app.js` + `refs.py`, each with a References section. ➕ 2026-06-28
+- [ ] Combo guide → name specials as accent pills (input in `title=`), keep normals as keycaps; ID every combo (`CA-01`…) in display order; group by use-case; paginate one-screen cards by weight + measure ≤418px. ➕ 2026-06-28
+- [ ] Old fighting-game FAQs use 6-button naming → normalise to MvC2's 4 buttons (`LP→LK→HP→HK`), fold phantom-medium duplicates, note the merge. ➕ 2026-06-28
+- [ ] References/citations: external `http(s)` links to sources are allowed in standalone files — whitelist those hosts in the self-containment audit (don't flag as asset leaks). ➕ 2026-06-28
 
 ---
 
@@ -375,6 +409,27 @@ Inline the CSS in a `<style>` tag and the JS (expand-all + auto-hide) in a `<scr
 > Render stick motions as **short text tokens** (`QCF`, `QCB`, `DP`, `HCB`, `[B]F`, `F-DF-D`…), **not** screen-direction arrows (`↓↘→`). Tokens are **facing-relative** (`F`/`B` = *toward / away from* the opponent), so they stay correct on **both** sides of the screen — arrows are only right while the character faces right. The complete, canonical scheme (directions, named motions, charge, modifiers, the spell-out rule for unnamed motions, and a glyph→token migration map) lives in **[`docs/input-notation.md`](../docs/input-notation.md)** — use those exact tokens, don't invent new ones.
 > - **Add a notation ledger near the top of every fighting-game guide** (right beside the button-colour `leg-grid`) mapping each token used → its meaning. This is what keeps the guide self-contained now that pills are abbreviations.
 > - Because the tokens are self-documenting and the top ledger explains them once, the old per-card inline mini-legends (`motlegend`/`minileg`) are **redundant — drop them.**
+
+> [!important] Combo-guide content: name the specials, ID every combo, group by use-case
+> A dedicated **combo guide** has conventions beyond a movelist that keep it readable and one-screen-friendly:
+> - **Refer to special moves by name, not raw motion.** Render a special/super as a small **named pill**
+>   tinted in the character's accent (`.sp{color:var(--ca)}`) with the full input in the `title=` tooltip
+>   (e.g. *Cyclone Kick*, hover → `QCB + K`). Keep **normals** (LP/LK/HP/HK and directional launchers like
+>   `D+HP`) as the coloured keycaps — those are what you're drilling. Far more compact than `motion+button`
+>   everywhere, and it's what lets long combos fit one screen. (The raw inputs still live once in the
+>   copied one-screen movesets + the top notation ledger.)
+> - **Give every combo a stable unique ID** — char prefix + number (`CA-01`, `BB-07`, `CY-23`). Assign them
+>   in **display order** (use-case group order, stable within group) so they're contiguous & gap-free, and
+>   show the same ID in *both* the detailed listing and the single-screen practice cards so the user can say
+>   "drill CY-11." Render `cr.`/`j.` prefixes *inside* the button group (no stray separators).
+> - **Group by use-case**, not just difficulty — Ground BnB / anti-air & quick confirms / hit-confirm into
+>   super / launcher→Aerial-Rave / OTG & relaunch / special-cancel & beam-links / corner & loops / throws &
+>   resets / team-DHC. Add a difficulty marker (`●○○`) and a small badge for staples shared with a sibling guide.
+> - **Normalise old movelists to the real button count.** Old MvC2 FAQs use 6-button SF naming
+>   (jab/strong/fierce, short/forward/roundhouse, or `WP/WK/Strong/Forward/HP/HK`) but **MvC2 has only
+>   `LP/HP/LK/HK`** — the magic series is `LP → LK → HP → HK`, and tapping a light twice climbs it. Map the
+>   phantom "medium" onto the real chain and **fold the true duplicates that creates** (that's correcting the
+>   source, not dropping combos) — say so in prose. Cross-check several FAQs against each other.
 
 **The AYN Thor has a Nintendo-style ABXY face cluster with coloured buttons; the shoulders/triggers are grey.** Positions and colours:
 

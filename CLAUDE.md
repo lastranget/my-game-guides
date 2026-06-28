@@ -10,7 +10,12 @@ HTML game guides** plus a browsable index, deployed as a GitHub Pages site
   `tetris/`, …). **Each `.html` file is fully standalone**: all CSS/JS/images are inlined
   (images as `data:` URLs / inline SVG), no external assets, no network needed, and **no
   hyperlinks between files**. A guide must work opened directly from disk. The index discovers
-  these recursively, so new games just need a new subfolder.
+  these recursively, so new games just need a new subfolder. One team/character can have a
+  **companion set** of guides rather than one giant file — e.g. the MvC2 Cammy/BB&nbsp;Hood/Cyclops
+  set is `…-cammy-bbhood-cyclops.html` (beginner), `…-combos.html` (combo dojo), and
+  `…-advanced.html` (strategy). They stay standalone (reference siblings by **plain-text filename**,
+  never a link) and each carries a **"References & sources"** section citing the source FAQs
+  (external `http(s)` citation links are allowed; cross-*file* `.html` links are not).
 - **`instructions/`** — the authoring playbook
   (`Scraping a Website into a Single Self-Contained HTML File.md`). It is the **style guide and
   process** every guide follows: PORT vs AGGREGATE modes, the headless-Chromium scraping/extraction
