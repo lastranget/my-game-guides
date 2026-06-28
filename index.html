@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23000'/%3E%3Cpath d='M3 4h10M3 8h10M3 12h7' stroke='%237cc0ff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<title>Game Guides — Index</title>
+<style>
+:root{--bg:#000;--fg:#f2f2f2;--muted:#9a9aa2;--accent:#7cc0ff;
+--card:#0d0d11;--card2:#17171d;--border:#2b2b33;--good:#2fb84a;--bad:#ec5b5b;--maxw:820px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:54px;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--fg);font-size:17px;line-height:1.6;
+font-family:-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;overflow-wrap:break-word;overflow-x:clip;max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:10px 14px 96px;width:100%}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+img,video,iframe,embed,object{max-width:100%;height:auto}
+
+/* sticky header */
+header.bar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;
+align-items:center;gap:10px;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 14px}
+header.bar .title{font-weight:800;font-size:1.05rem;display:flex;align-items:center;gap:8px}
+header.bar .title .count{font-size:.72rem;font-weight:700;color:var(--accent);
+background:var(--card2);border:1px solid var(--border);border-radius:999px;padding:1px 8px}
+header.bar .tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.ibtn{cursor:pointer;font:inherit;font-size:.8rem;font-weight:700;color:var(--fg);
+background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:6px 10px;line-height:1}
+.ibtn:hover{border-color:var(--accent)}
+
+h1{font-size:1.5rem;margin:.4em 0 .1em}
+.lede{color:var(--muted);margin:.2em 0 1em;font-size:.95rem}
+
+/* status / messages */
+#status{margin:14px 0;padding:12px 14px;border:1px solid var(--border);border-radius:10px;
+background:var(--card);color:var(--muted);font-size:.92rem}
+#status.err{border-color:var(--bad);color:#ffb3b3}
+#status.hidden{display:none}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border);
+border-top-color:var(--accent);border-radius:50%;vertical-align:-2px;margin-right:8px;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* category groups */
+details.cat{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:14px 0;background:var(--card)}
+details.cat>summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;font-size:1.05rem;
+background:var(--card2);display:flex;align-items:center;gap:10px}
+details.cat>summary::-webkit-details-marker{display:none}
+details.cat>summary .chev{transition:transform .2s ease;color:var(--muted)}
+details.cat[open]>summary .chev{transform:rotate(90deg)}
+details.cat>summary .cc{margin-left:auto;font-size:.72rem;font-weight:700;color:var(--muted);
+background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:1px 8px}
+.cat-body{padding:8px 10px}
+
+/* entries */
+.entry{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+padding:10px 10px;border-radius:9px;border:1px solid transparent}
+.entry+.entry{border-top:1px solid var(--border)}
+.entry:hover{background:var(--card2)}
+.entry .meta{flex:1 1 220px;min-width:0}
+.entry .name{font-weight:700;overflow-wrap:anywhere}
+.entry .path{font-size:.74rem;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+overflow-wrap:anywhere;margin-top:2px}
+.entry .actions{display:flex;gap:8px;flex:0 0 auto}
+.btn{cursor:pointer;font:inherit;font-size:.82rem;font-weight:700;border-radius:8px;
+padding:8px 12px;line-height:1;border:1px solid var(--border);white-space:nowrap;text-align:center}
+.btn.view{background:var(--accent);color:#000;border-color:var(--accent)}
+.btn.view:hover{text-decoration:none;filter:brightness(1.08)}
+.btn.dl{background:var(--card2);color:var(--fg)}
+.btn.dl:hover{border-color:var(--accent)}
+.btn[disabled]{opacity:.5;cursor:progress}
+
+footer{margin-top:30px;padding-top:14px;border-top:1px solid var(--border);
+color:var(--muted);font-size:.8rem}
+footer code{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+</style>
+</head>
+<body>
+<header class="bar">
+  <span class="title">Game Guides <span class="count" id="count" hidden></span></span>
+  <span class="tools">
+    <button class="ibtn" id="toggleAll" hidden>Collapse all</button>
+    <button class="ibtn" id="refresh" title="Re-scan the repository">Refresh</button>
+  </span>
+</header>
+
+<div class="wrap">
+  <h1>Game Guides</h1>
+  <p class="lede">Self-contained, offline-ready HTML guides. Pick <b>View</b> to read one in the browser, or <b>Download</b> to save it to this device.</p>
+
+  <div id="status"><span class="spin"></span>Scanning the <code>guides/</code> folder&hellip;</div>
+  <div id="list"></div>
+
+  <footer>
+    Listing is generated client-side. GitHub Pages serves static files only (no directory index),
+    so this page enumerates the repo through the
+    <a href="https://docs.github.com/en/rest/git/trees#get-a-tree" target="_blank" rel="noopener">GitHub git-trees API</a>
+    (<code>?recursive=1</code>), filtered to <code>guides/**/*.html</code>. Add a guide and it appears here automatically.
+    If the API is unavailable it falls back to a committed <code>manifest.json</code>.
+  </footer>
+</div>
+
+<script>
+"use strict";
+(function(){
+  /* ---------- config ---------------------------------------------------- */
+  // Known repo, used as the reliable default. Auto-detection (below) and
+  // ?owner=&repo=&branch= query params can override it (e.g. for forks).
+  var CONFIG = { owner: "lastranget", repo: "my-game-guides", branch: "main" };
+  var ROOT = "guides";                 // only list .html under this folder
+  var CACHE_KEY = "guides-index-cache";
+  var CACHE_TTL = 10 * 60 * 1000;      // 10 min, to be gentle on the API rate limit
+
+  var qs = new URLSearchParams(location.search);
+
+  // Pretty names for known top-level folders; unknown ones are title-cased.
+  var CAT_NAMES = {
+    garou:  "Garou: Mark of the Wolves",
+    mvc2:   "Marvel vs. Capcom 2",
+    tetris: "Tetris (FOUR)"
+  };
+
+  /* ---------- repo resolution ------------------------------------------- */
+  function detectFromLocation(){
+    var host = location.hostname;
+    if(!/\.github\.io$/i.test(host)) return null;          // custom domain / localhost
+    var owner = host.replace(/\.github\.io$/i, "");
+    var parts = location.pathname.split("/").filter(Boolean);
+    // user/org page (served at root): repo is "<owner>.github.io"
+    if(parts.length === 0 || /\.html?$/i.test(parts[0])) return { owner: owner, repo: host };
+    // project page: repo is the first path segment
+    return { owner: owner, repo: parts[0] };
+  }
+  function resolveRepo(){
+    var det = detectFromLocation() || {};
+    return {
+      owner:  qs.get("owner")  || CONFIG.owner  || det.owner,
+      repo:   qs.get("repo")   || CONFIG.repo   || det.repo,
+      branch: qs.get("branch") || CONFIG.branch || "main"
+    };
+  }
+
+  /* ---------- helpers --------------------------------------------------- */
+  var $ = function(s){ return document.querySelector(s); };
+  function setStatus(html, isErr){
+    var el = $("#status");
+    el.className = isErr ? "err" : "";
+    el.innerHTML = html;
+  }
+  function hideStatus(){ $("#status").className = "hidden"; }
+  function decodeEntities(s){
+    var t = document.createElement("textarea"); t.innerHTML = s; return t.value;
+  }
+  function basename(p){ return p.split("/").pop(); }
+  function prettyName(file){
+    return file.replace(/\.html?$/i, "")
+               .replace(/[-_]+/g, " ")
+               .replace(/\b\w/g, function(c){ return c.toUpperCase(); });
+  }
+  function catName(folder){
+    return CAT_NAMES[folder] || folder.replace(/[-_]+/g," ").replace(/\b\w/g,function(c){return c.toUpperCase();});
+  }
+
+  /* ---------- data sources ---------------------------------------------- */
+  // Test hook: set window.GUIDES_FILES = ["guides/a/b.html", ...] before load.
+  function fromHook(){
+    return (Array.isArray(window.GUIDES_FILES) && window.GUIDES_FILES.length)
+      ? window.GUIDES_FILES.slice() : null;
+  }
+
+  function fromCache(){
+    try{
+      var raw = localStorage.getItem(CACHE_KEY);
+      if(!raw) return null;
+      var obj = JSON.parse(raw);
+      if(Date.now() - obj.t > CACHE_TTL) return null;
+      if(obj.repo !== (R.owner+"/"+R.repo+"@"+R.branch)) return null;
+      return obj.files;
+    }catch(e){ return null; }
+  }
+  function saveCache(files){
+    try{
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        t: Date.now(), repo: R.owner+"/"+R.repo+"@"+R.branch, files: files
+      }));
+    }catch(e){}
+  }
+
+  function fromGitHubAPI(){
+    if(!R.owner || !R.repo) return Promise.reject(new Error("repo not resolved"));
+    var url = "https://api.github.com/repos/"+R.owner+"/"+R.repo+
+              "/git/trees/"+encodeURIComponent(R.branch)+"?recursive=1";
+    return fetch(url, { headers: { "Accept": "application/vnd.github+json" } })
+      .then(function(res){
+        if(res.status === 403) throw new Error("GitHub API rate limit reached (try again later)");
+        if(!res.ok) throw new Error("GitHub API "+res.status);
+        return res.json();
+      })
+      .then(function(data){
+        if(data.truncated){ /* very large repos: tree is paginated; guides folder is small so fine */ }
+        if(!data.tree) throw new Error("Unexpected API response");
+        return data.tree
+          .filter(function(n){ return n.type === "blob"; })
+          .map(function(n){ return n.path; })
+          .filter(function(p){ return p.indexOf(ROOT + "/") === 0 && /\.html?$/i.test(p); });
+      });
+  }
+
+  function fromManifest(){
+    return fetch("manifest.json", { cache: "no-cache" })
+      .then(function(res){ if(!res.ok) throw new Error("manifest.json "+res.status); return res.json(); })
+      .then(function(arr){
+        if(!Array.isArray(arr)) throw new Error("manifest.json is not an array");
+        return arr.filter(function(p){ return p.indexOf(ROOT + "/") === 0 && /\.html?$/i.test(p); });
+      });
+  }
+
+  /* ---------- title enhancement (progressive) --------------------------- */
+  // Read just the <title> by streaming the first few KB, then abort — so we
+  // never download a whole (possibly image-heavy) guide just for its name.
+  function fetchTitle(path){
+    var ctrl = new AbortController();
+    return fetch(path, { headers: { Range: "bytes=0-16383" }, signal: ctrl.signal })
+      .then(function(res){
+        if(!res.ok && res.status !== 206) throw 0;
+        var reader = res.body.getReader(), dec = new TextDecoder(), buf = "", reads = 0;
+        function pump(){
+          return reader.read().then(function(r){
+            if(r.done) return buf;
+            buf += dec.decode(r.value, { stream: true });
+            reads++;
+            if(buf.indexOf("</title>") !== -1 || reads >= 6){ try{ ctrl.abort(); }catch(e){} return buf; }
+            return pump();
+          });
+        }
+        return pump();
+      })
+      .then(function(buf){
+        var m = buf && buf.match(/<title>([\s\S]*?)<\/title>/i);
+        return m ? decodeEntities(m[1].trim()) : null;
+      })
+      .catch(function(){ return null; });
+  }
+
+  /* ---------- render ----------------------------------------------------- */
+  function render(paths){
+    paths.sort();
+    if(!paths.length){
+      setStatus("No guides found under <code>"+ROOT+"/</code>.", false);
+      return;
+    }
+    // group by top-level folder under ROOT
+    var groups = {};
+    paths.forEach(function(p){
+      var rest = p.slice(ROOT.length + 1);       // e.g. "garou/garou-terry.html"
+      var parts = rest.split("/");
+      var folder = parts.length > 1 ? parts[0] : "(root)";
+      (groups[folder] = groups[folder] || []).push(p);
+    });
+
+    var list = $("#list");
+    list.textContent = "";
+    var total = 0, pending = [];
+    Object.keys(groups).sort().forEach(function(folder){
+      var d = document.createElement("details"); d.className = "cat"; d.open = true;
+      var sum = document.createElement("summary");
+      sum.innerHTML = '<span class="chev">&#9656;</span>' +
+        '<span>'+escapeHtml(catName(folder))+'</span>' +
+        '<span class="cc">'+groups[folder].length+'</span>';
+      d.appendChild(sum);
+      var body = document.createElement("div"); body.className = "cat-body";
+
+      groups[folder].forEach(function(path){
+        total++;
+        var file = basename(path);
+        var row = document.createElement("div"); row.className = "entry";
+
+        var meta = document.createElement("div"); meta.className = "meta";
+        var name = document.createElement("div"); name.className = "name";
+        name.textContent = prettyName(file);
+        var pathEl = document.createElement("div"); pathEl.className = "path";
+        pathEl.textContent = path;
+        meta.appendChild(name); meta.appendChild(pathEl);
+
+        var actions = document.createElement("div"); actions.className = "actions";
+        var view = document.createElement("a"); view.className = "btn view";
+        view.href = path; view.textContent = "View";       // same-tab navigation (standalone page)
+        // same-origin file + download attr => browser saves it instead of navigating
+        var dl = document.createElement("a"); dl.className = "btn dl";
+        dl.href = path; dl.setAttribute("download", file); dl.textContent = "Download";
+        actions.appendChild(view); actions.appendChild(dl);
+
+        row.appendChild(meta); row.appendChild(actions);
+        body.appendChild(row);
+
+        // progressive: upgrade the display name with the page's real <title>
+        pending.push({ path: path, el: name });
+      });
+
+      d.appendChild(body); list.appendChild(d);
+    });
+
+    var c = $("#count"); c.hidden = false; c.textContent = total;
+    $("#toggleAll").hidden = false;
+    hideStatus();
+
+    // fetch titles with light concurrency
+    var i = 0;
+    function next(){
+      if(i >= pending.length) return;
+      var item = pending[i++];
+      fetchTitle(item.path).then(function(t){ if(t) item.el.textContent = t; }).then(next);
+    }
+    for(var k = 0; k < 4; k++) next();
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  /* ---------- load orchestration ---------------------------------------- */
+  var R;
+  function load(force){
+    R = resolveRepo();
+    setStatus('<span class="spin"></span>Scanning the <code>'+ROOT+'/</code> folder&hellip;', false);
+
+    var hook = fromHook();
+    if(hook){ render(hook); return; }
+
+    if(!force){
+      var cached = fromCache();
+      if(cached){ render(cached); return; }
+    }
+
+    fromGitHubAPI()
+      .then(function(files){ saveCache(files); render(files); })
+      .catch(function(apiErr){
+        // fall back to a committed manifest if present
+        return fromManifest()
+          .then(function(files){
+            render(files);
+            // soft note that we used the fallback
+            console.warn("Used manifest.json fallback:", apiErr && apiErr.message);
+          })
+          .catch(function(mErr){
+            setStatus("Couldn't list guides.<br>GitHub API: "+escapeHtml(apiErr.message)+
+                      "<br>Fallback: "+escapeHtml(mErr.message), true);
+          });
+      });
+  }
+
+  /* ---------- controls --------------------------------------------------- */
+  document.addEventListener("click", function(e){
+    if(e.target.id === "refresh"){
+      try{ localStorage.removeItem(CACHE_KEY); }catch(err){}
+      $("#count").hidden = true; $("#toggleAll").hidden = true;
+      load(true);
+    }
+    if(e.target.id === "toggleAll"){
+      var cats = document.querySelectorAll("details.cat");
+      var anyOpen = [].some.call(cats, function(d){ return d.open; });
+      [].forEach.call(cats, function(d){ d.open = !anyOpen; });
+      e.target.textContent = anyOpen ? "Expand all" : "Collapse all";
+    }
+  });
+
+  load(false);
+})();
+</script>
+</body>
+</html>
