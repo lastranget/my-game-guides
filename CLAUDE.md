@@ -28,6 +28,16 @@ HTML game guides** plus a browsable index, deployed as a GitHub Pages site
   Every fighting-game guide renders move inputs with these tokens and carries a **notation ledger**
   near the top mapping the tokens it uses. New/edited fighting-game guides must follow it (see also
   §11 of the playbook).
+- **`tools/`** — the **generator toolchain** for AGGREGATE-mode guides (the ones authored from
+  community FAQs). A shared glyph engine + stylesheet (`gen.py`, `style.css`, `app.js`) plus
+  per-game build scripts that emit the HTML from data structures, and research/QA helpers
+  (`kof_fetch.sh` Wayback fetcher, `kof_convert.py` FAQ→data converter, `fitcheck.js` overflow/
+  one-screen checker). **`tools/README.md`** catalogues every tool and how to run it.
+  **Put any new reusable tool here** (generator, scraper, converter, QA script) and add it to the
+  catalogue. **`tools/build-map.json`** is the authoritative **guide → tool** mapping (which script
+  + data files built each guide; hand-authored guides are marked `builder: null`) — keep it current
+  when you add or regenerate a guide. Generated guides are still committed; regenerate with e.g.
+  `python3 tools/build_kof.py`.
 - **`index.html`** — the landing page (see below).
 - **`manifest.json`** — fallback file list for the index (see below).
 - **`README.md`** — short public overview.

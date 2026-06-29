@@ -1,0 +1,171 @@
+:root{--bg:#000;--fg:#f2f2f2;--muted:#9a9aa2;--accent:#7cc0ff;
+--card:#0d0d11;--card2:#17171d;--border:#2b2b33;--maxw:820px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:54px;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--fg);font-size:17px;line-height:1.6;
+font-family:-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;overflow-wrap:break-word;overflow-x:clip;max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:10px 14px 96px;width:100%}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+h1{font-size:1.5rem;margin:.2em 0}
+h2{font-size:1.25rem;display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+border-top:2px solid var(--border);padding-top:14px;margin:34px 0 10px}
+h3{font-size:1.05rem;margin:1.1em 0 .4em;color:var(--accent)}
+h4{font-size:.95rem;margin:.9em 0 .3em;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+p{margin:.6em 0}
+img,svg,video,iframe{max-width:100%}
+ul{margin:.4em 0 .8em;padding-left:1.3em}ul li{margin:.35em 0}
+.intro{color:var(--muted)}
+.note2{color:var(--muted);font-size:.85rem;margin:.6em 0}
+.bt{font-size:.7rem;font-weight:400;white-space:nowrap}
+
+/* sticky header + back-to-top (auto-hide on scroll) */
+header.bar{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+gap:10px;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 14px;
+transition:transform .25s ease;will-change:transform}
+header.bar .title{font-weight:700;font-size:1rem}
+header.bar a.jump{font-size:.85rem;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:var(--card2)}
+#totop{position:fixed;right:14px;bottom:14px;z-index:60;width:46px;height:46px;border-radius:50%;
+background:var(--accent);color:#000;display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+text-decoration:none;box-shadow:0 0 0 1px var(--border);opacity:.92;transition:opacity .25s ease,transform .25s ease}
+body.hide-chrome header.bar{transform:translateY(-100%)}
+body.hide-chrome #totop{opacity:0;transform:translateY(72px);pointer-events:none}
+
+/* TOC */
+nav#toc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:8px 12px;margin:14px 0 24px}
+.toc-head h2{border:0;padding:0;margin:.2em 0;display:block}
+nav#toc ul{list-style:none;margin:.2em 0;padding:0}
+nav#toc li a{display:block;padding:9px 8px;border-radius:7px;font-weight:600}
+nav#toc li a:hover{background:var(--card2);text-decoration:none}
+@media (min-width:560px){nav#toc ul.toc-top{columns:2;column-gap:26px}nav#toc li{break-inside:avoid}}
+
+/* input glyphs */
+.key{height:1.5em;width:auto;vertical-align:-0.34em}
+.dir{display:inline-block;background:#3a3e46;color:#fff;border:1px solid rgba(0,0,0,.4);border-radius:6px;
+padding:0 .4em;font-weight:700;font-size:.82em;line-height:1.5;vertical-align:middle}
+.mot{display:inline-block;background:#26282e;color:#dfe2ea;border:1px solid var(--border);border-radius:6px;
+padding:0 .45em;font-size:.86em;letter-spacing:.06em;line-height:1.5;vertical-align:middle}
+.plus{color:var(--muted);font-weight:700;padding:0 .12em;font-size:.85em}
+.air{display:inline-block;background:#1d2733;color:#9fd0ff;border:1px solid #2a3a4d;border-radius:5px;
+font-size:.66em;padding:0 .35em;margin-right:.2em;vertical-align:middle;text-transform:uppercase;letter-spacing:.05em}
+.grp{display:inline-flex;align-items:center;gap:.12em;white-space:nowrap}
+.cs{color:#565a63;padding:0 .15em;font-weight:700}
+.ann{color:var(--muted);font-size:.8em;font-style:italic;padding:0 .15em}
+.pfx{color:var(--muted);font-style:italic;font-size:.82em;padding-right:.12em}
+/* named special move (input in tooltip) — glows in the character accent */
+.sp{display:inline-block;color:var(--ca,#cbd2e0);background:var(--card2);border:1px solid var(--border);
+border-radius:6px;padding:0 .42em;font-size:.84em;font-weight:600;line-height:1.5;vertical-align:middle}
+
+/* legend */
+.legendwrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin:.6em 0}
+.leg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 14px}
+@media (min-width:560px){.leg-grid{grid-template-columns:repeat(3,1fr)}}
+.lg{display:flex;align-items:center;gap:8px;font-size:.86rem}
+.motlegend{margin-top:8px;font-size:.82rem;color:var(--muted);line-height:2}
+
+/* moveset cards */
+.card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--ca);
+border-radius:10px;padding:8px 12px;margin:12px 0}
+.card-h{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:4px}
+.card-h b{color:var(--ca);font-size:1.05rem}
+.card-h span{color:var(--muted);font-size:.8rem}
+.ms .mv{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:4px 0;
+border-bottom:1px solid #15151b}
+.ms .mv:last-child{border-bottom:0}
+.mv .nm{font-size:.9rem;flex:1;min-width:0}
+.mv .note{color:var(--muted);font-size:.74rem}
+.mv .in{display:flex;align-items:center;gap:.15em;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0}
+
+/* combos — detailed listing */
+.ccombo{border-left:4px solid var(--ca);padding-left:10px;margin:18px 0}
+.ccombo h3{color:var(--ca)}
+.ccombo h3 .role{color:var(--muted);font-size:.8rem;font-weight:400}
+.ucg{margin:1.15em 0 .4em;color:var(--ca);font-weight:700;font-size:.8rem;text-transform:uppercase;
+letter-spacing:.06em;border-bottom:1px solid var(--border);padding-bottom:3px}
+.cmb{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 10px;margin:6px 0}
+.cmb-h{font-size:.9rem;color:var(--fg);margin-bottom:5px;display:flex;align-items:center;flex-wrap:wrap;gap:1px 2px}
+.cmb-h b{font-weight:700;color:var(--fg)}
+.cid{display:inline-block;font-size:.66rem;font-weight:800;color:var(--ca);background:#000;border:1px solid var(--ca);
+border-radius:5px;padding:0 .4em;margin-right:.5em;letter-spacing:.02em;font-variant-numeric:tabular-nums;vertical-align:middle}
+.diff{color:var(--ca);font-size:.7rem;letter-spacing:1px;margin-left:.5em;opacity:.8}
+.corez{display:inline-block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+color:#ffd479;background:#2a2410;border:1px solid #4a3f1a;border-radius:4px;padding:0 .35em;margin-left:.45em;vertical-align:middle}
+.cmb-note{color:var(--muted);font-size:.76rem;margin-top:4px;line-height:1.45}
+.combo{display:flex;align-items:center;gap:.18em;flex-wrap:wrap;line-height:1.9}
+
+/* combo vocabulary rows */
+.sys{margin:.6em 0 1.2em}
+.sysrow{border:1px solid var(--border);border-radius:9px;background:var(--card);padding:7px 11px;margin:7px 0}
+.sysrow .top{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap}
+.sysrow .nm{font-weight:700;font-size:.93rem;color:var(--accent)}
+.sysrow .dsc{color:var(--muted);font-size:.83rem;margin-top:4px;line-height:1.5}
+.sysrow .dsc b{color:var(--fg);font-weight:600}
+
+/* one-screen cards: tighter so a full moveset fits the Thor bottom screen */
+.card.onescreen{font-size:13px;padding:5px 10px;margin:6px 0}
+.card.onescreen .ms .mv{padding:1px 0}
+.card.onescreen .mv .nm{font-size:.82rem}
+.card.onescreen .mv .note{display:none}
+.card.onescreen .key{height:1.4em}
+.screenfit h2{font-size:1.05rem;margin-top:14px;padding-top:10px}
+.screenfit .card{margin:8px 0}
+
+/* single-screen combo cards (compact, paginated) */
+.card.combo-screen{font-size:12px;padding:5px 10px;margin:6px 0}
+.combo-screen .cscreen .cmb{background:transparent;border:0;border-bottom:1px solid #15151b;
+border-radius:0;padding:3px 0;margin:0}
+.combo-screen .cscreen .cmb:last-child{border-bottom:0}
+.combo-screen .cmb-h{font-size:.74rem;margin-bottom:1px}
+.combo-screen .cmb-h b{font-weight:600}
+.combo-screen .cid{font-size:.6rem;margin-right:.35em}
+.combo-screen .diff{margin-left:.35em}
+.combo-screen .key{height:1.32em}
+.combo-screen .combo{line-height:1.65;gap:.14em}
+.combo-screen .sp{font-size:.8em;padding:0 .35em}
+
+/* KOF guides — movelist groups, hit-count pill, separators */
+.mlgrp{margin:.3em 0 .5em}
+.mlgrp h4{margin:.7em 0 .2em}
+.hits{display:inline-block;font-size:.62rem;color:var(--muted);background:var(--card2);
+border:1px solid var(--border);border-radius:4px;padding:0 .35em;margin-left:.4em;vertical-align:middle}
+.osep{color:var(--muted);font-size:.78em;padding:0 .2em}
+
+/* advanced guide — strengths/weaknesses */
+.sw{display:grid;gap:2px 18px;margin:.3em 0 .5em}
+@media (min-width:520px){.sw{grid-template-columns:1fr 1fr}}
+.sw h4{margin:.2em 0 .15em;font-size:.78rem}
+.sw h4.pro{color:#7fe0a0}.sw h4.con{color:#ff9a9a}
+.sw ul{margin:.1em 0 .4em;padding-left:1.05em}
+.sw li{margin:.2em 0;font-size:.85rem;color:var(--fg)}
+.sw li::marker{color:var(--ca)}
+/* assist reference rows */
+.arow{display:flex;align-items:baseline;gap:8px;padding:5px 0;border-bottom:1px solid #15151b}
+.arow:last-child{border-bottom:0}
+.atype{font-weight:700;color:var(--ca);white-space:nowrap;font-size:.86rem;min-width:4.6em}
+.adesc{color:var(--muted);font-size:.83rem;flex:1;min-width:0}
+.adesc b{color:var(--fg);font-weight:600}
+.pick{display:inline-block;font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+color:#000;background:var(--ca);border-radius:4px;padding:0 .4em;margin-left:.4em;vertical-align:middle}
+/* matchup cards */
+.mu{border-left:4px solid var(--accent);background:var(--card);border:1px solid var(--border);
+border-radius:9px;padding:7px 11px;margin:8px 0}
+.mu-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:3px}
+.mu-h b{color:var(--accent);font-size:1rem}
+.mu-h .mtier{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.mu .dsc{color:var(--muted);font-size:.85rem;line-height:1.55}
+.mu .dsc b{color:var(--fg);font-weight:600}
+.donts .sysrow .nm{color:#ff9a9a}
+.sysrow .in .key{height:1.4em}
+
+/* all-three trio */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.card.tiny{font-size:10.5px;padding:4px 6px;border-left-width:3px}
+.card.tiny .card-h{padding-bottom:3px;margin-bottom:2px}
+.card.tiny .card-h b{font-size:.92rem}
+.card.tiny .card-h span{display:none}
+.card.tiny .ms .mv{flex-direction:column;align-items:flex-start;gap:1px;padding:2px 0}
+.card.tiny .mv .nm{font-size:.72rem;line-height:1.15}
+.card.tiny .mv .in{justify-content:flex-start}
+.card.tiny .key{height:1.4em}
+@media (max-width:430px){.card.tiny{font-size:9.2px}}
+@media (min-width:560px){.card.tiny .ms .mv{flex-direction:row;justify-content:space-between;align-items:center}
+ .card.tiny{font-size:13px}}

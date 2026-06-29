@@ -1,0 +1,47 @@
+{
+  "_comment": "Which guide was produced by which tool. Regenerate a generated guide with: python3 tools/<entry|builder>. Hand-authored guides have builder=null.",
+  "shared": ["tools/gen.py", "tools/style.css", "tools/app.js"],
+  "guides": {
+    "guides/mvc2/mvc2-cammy-bbhood-cyclops.html": {
+      "builder": null,
+      "note": "Hand-authored (predates the toolchain). Later hand-edited to add the References section."
+    },
+    "guides/mvc2/mvc2-cammy-morrigan-cyclops.html": {
+      "builder": null,
+      "note": "Hand-authored (predates the toolchain)."
+    },
+    "guides/mvc2/mvc2-cammy-bbhood-cyclops-combos.html": {
+      "builder": "tools/build.py",
+      "data": ["tools/data.py", "tools/refs.py"],
+      "run": "python3 tools/build.py",
+      "sources": ["GameFAQs MvC2 FAQs 7669, 22878, 8517, 8318, 7893, 7945, 9838"]
+    },
+    "guides/mvc2/mvc2-cammy-bbhood-cyclops-advanced.html": {
+      "builder": "tools/build3.py",
+      "data": ["tools/refs.py"],
+      "run": "python3 tools/build3.py",
+      "sources": ["GameFAQs MvC2 FAQs 7669, 22878, 8517, 8318, 7893, 7945, 9838"]
+    },
+    "guides/kofxi/kofxi-terry.html": {
+      "builder": "tools/build_kof.py",
+      "data": ["tools/chardata.py", "tools/refs_kof.py"],
+      "run": "python3 tools/build_kof.py",
+      "sources": ["GameFAQs KOF XI FAQs 45250 (Terry), 44141 (system/movelist)"]
+    },
+    "guides/kofxi/kofxi-athena.html": {
+      "builder": "tools/build_kof.py",
+      "data": ["tools/chardata.py", "tools/athena_matchups.py", "tools/refs_kof.py"],
+      "run": "python3 tools/build_kof.py",
+      "sources": ["GameFAQs KOF XI FAQs 51436 (Athena), 44141 (system/movelist)"]
+    },
+    "guides/kofxi/kofxi-bjenet.html": {
+      "builder": "tools/build_kof.py",
+      "data": ["tools/chardata.py", "tools/bjenet_combos.py", "tools/refs_kof.py"],
+      "run": "python3 tools/build_kof.py",
+      "sources": ["GameFAQs KOF XI FAQs 44220 (B. Jenet), 44141 (system/movelist)"]
+    },
+    "guides/garou/garou-terry.html": { "builder": null, "note": "Hand-authored (predates the toolchain)." },
+    "guides/garou/garou-b-jenet.html": { "builder": null, "note": "Hand-authored (predates the toolchain)." },
+    "guides/tetris/*": { "builder": null, "note": "PORT-mode scrape of four.lol; built ad-hoc, scraper not retained in this repo." }
+  }
+}
