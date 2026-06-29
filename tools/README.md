@@ -23,6 +23,7 @@ The authoritative mapping is **`build-map.json`** (machine-readable). Human summ
 | `mvc2/…-felicia-cyclops-storm-advanced.html` | `build_fcs.py` | `fcs_text.py`, `storm_matchups.py`, `refs_fcs.py` | same FAQs |
 | `vsavior/vsavior-<char>.html` (beginner+advanced) | `build_vs.py` | `vs_data.py`, `refs_vs.py` | Vampire Savior FAQs 5283/7976/1237 + per-char 1243/1248/1247 |
 | `vsavior/vsavior-<char>-combos.html` | `build_vs.py` | `vs_data.py`, `refs_vs.py` | same |
+| `garou/garou-{terry,b-jenet}-combos.html` | `build_garou.py` | `garou_data.py`, `refs_garou.py` | Garou FAQs 6097/7828/14695/8673/14967 |
 | `kofxi/kofxi-terry.html` | `build_kof.py` | `chardata.py`, `refs_kof.py` | KOF XI FAQs 45250, 44141 |
 | `kofxi/kofxi-athena.html` | `build_kof.py` | `chardata.py`, `athena_matchups.py` | KOF XI FAQs 51436, 44141 |
 | `kofxi/kofxi-bjenet.html` | `build_kof.py` | `chardata.py`, `bjenet_combos.py` | KOF XI FAQs 44220, 44141 |
@@ -53,6 +54,13 @@ The authoritative mapping is **`build-map.json`** (machine-readable). Human summ
 - `vs_data.py` — movelists, combos (piece-lists), strengths/weaknesses and strategy for the four characters.
 - `refs_vs.py` — the shared "References & sources" section for the VS set.
   (`gen.py` carries the extra `MP`/`MK` grey medium-attack keycaps these 6-button guides need.)
+
+**Garou: Mark of the Wolves — Terry / B. Jenet** (4-button A/B/C/D)
+- `build_garou.py` — builds the **combo-dojo** guides (companions to the existing hand-authored
+  beginner guides). `python3 tools/build_garou.py`
+- `garou_data.py` — combos (piece-lists), movelists and one-screen data for Terry &amp; B. Jenet.
+- `refs_garou.py` — the shared "References & sources" section for the Garou combo guides.
+  (`gen.py` carries the SNK `A/B/C/D` keycaps these use, shared with the KOF set.)
 
 **KOF XI — Athena / Terry / B. Jenet**
 - `build_kof.py` — builds all three KOF guides. `python3 tools/build_kof.py`

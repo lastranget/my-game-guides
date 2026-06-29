@@ -65,16 +65,22 @@ COMBOS['morrigan'] = [
    'Deep jumping HP into the full chain + Shadow Blade.', '', 1, core=True),
  C('special', 'Chain → Vector Drain', [G('LP','LK'), PRE('then'), SP('Vector Drain','HCB','HP'), TAG('command throw')],
    'Tick a light, then the command grab — a frame trap into a throw.', '', 2),
- C('super', 'Chain → Finishing Shower', [G('LP','LK','MP','HP'), TAG('XX'), SP('Finishing Shower','MP-LP-B-LK-MK','')],
-   'Cancel a chain into the missile super (aim the shots with d / u).', '', 2, core=True),
  C('super', 'Chain → Darkness Illusion', [G('LP','LK'), TAG('XX'), SP('Darkness Illusion','LP-LP-F-LK-HP','',air=True)],
-   'Her signature hyper — easiest after a short confirm; air-OK.', '', 3),
+   'Her signature hyper — it comes out fast enough to combo off a jab or short. Air-OK; 27 hits '
+   'grounded / 21 in the air.', '', 2, core=True),
+ C('super', 'Valkyrie Turn → combo', [SP('Valkyrie Turn','HCB','K'), TAG('then K'), PRE('then'),
+   G('LP','LK','MP','MK','HP'), TAG('XX'), SP('Shadow Blade','DP','P')],
+   'Valkyrie Turn is invincible on start-up; you can combo <i>after</i> it — set up big damage '
+   '(huge under Astral Vision).', '', 3),
  C('otg', 'Air chain → air Soul Fist', [PRE('air'), G('LP','LK','MP','HP'), TAG('XX'),
    SP('Soul Fist','QCF','P',air=True)],
-   'Off a launch / air-to-air, chain in the air and fire on the way down.', '', 2),
+   'Off an air-to-air, chain in the air and fire the diagonal fist on the way down.', '', 2),
  C('df', 'Astral Vision pressure', [SP('Astral Vision','P+K',''), TAG('Dark Force'), PRE('then'),
    G('LP','LK','MP','MK','HP'), TAG('mirror hits')],
    'Activate the mirror, then chain — the clone doubles every hit for huge damage.', '', 3),
+ C('df', 'Astral → Valkyrie loop', [SP('Astral Vision','P+K',''), PRE('then'), G('LP','LK','MP'),
+   TAG('XX'), SP('Valkyrie Turn','HCB','K'), TAG('combo after')],
+   'Under the mirror, Valkyrie Turn into a follow-up combo does enormous damage.', '', 3),
 ]
 
 # ============================================================ LILITH — authored from chains + movelist
@@ -95,9 +101,14 @@ COMBOS['lilith'] = [
  C('otg', 'Mystic Arrow okizeme', [G('LP','LK','MP'), TAG('XX'), SP('Mystic Arrow','HCB','P'),
    PRE('then'), SP('Pursuit','U','P')],
    'Arrow knocks down; follow with a Pursuit / safe-jump set-up.', '', 2),
+ C('otg', 'Air-to-air Soul Flash', [PRE('air'), G('LP','LK'), TAG('XX'), SP('Soul Flash','QCF','P',air=True)],
+   'Catch a jumper, air-chain and fire the diagonal flash on the way down.', '', 2),
  C('df', 'Mirror Doll pressure', [SP('Mirror Doll','HP+HK',''), TAG('Dark Force'), PRE('then'),
    G('LP','LK','MP','MK','HP'), TAG('mirror hits')],
    'Like Morrigan’s Astral Vision — the doll doubles your chain.', '', 3),
+ C('df', 'Doll → Splendor loop', [SP('Mindless Doll','LP+LK',''), PRE('then'), G('LP','LK','MP'),
+   TAG('XX'), SP('Splendor Love','DP','KK'), TAG('doubled')],
+   'With the mimic doll out, a chain into Splendor Love lands twice for big damage.', '', 3),
 ]
 
 # ============================================================ FELICIA — authored from chains + movelist
@@ -125,6 +136,9 @@ COMBOS['felicia'] = [
  C('otg', 'Corner Rolling loop', [PRE('corner'), G('LP','LK','MP'), TAG('XX'), SP('Rolling Buckler','QCF','P'),
    TAG('Sliding Kick (K)'), PRE('OTG'), GC('LP'), G('LP','LK'), TAG('repeat')],
    'In the corner the Sliding-Kick ending of the Buckler lets you relink and loop.', '', 3),
+ C('jumpin', 'Air-to-air → land combo', [PRE('air'), G('LP','LK'), PRE('land'), G('LP','LK','MP','MK','HP'),
+   TAG('XX'), SP('Dancing Flash','HCF','PP')],
+   'Win the air with a quick air chain, land and run the full chain into the super.', '', 2),
 ]
 
 # ============================================================ movelists (specials + supers + throws)
@@ -223,21 +237,25 @@ SW = {
             ['Weak up close once you’re past the missiles.',
              'Several specials are slow / punishable on block.',
              'Leans on spacing — gets opened up if cornered.']),
- 'morrigan': (['Superb <b>all-rounder</b> — fireball, dragon-punch, command throw, air mobility.',
-               'Flying dash + vertical dash + Astral Vision make her offense relentless.',
-               '<b>Darkness Illusion</b> is a devastating, easy-to-confirm hyper.'],
-              ['No single dominant tool — wins on fundamentals.',
-               'Astral-Vision execution takes work to maximise.']),
- 'lilith': (['Very <b>fast</b> pressure with great air movement.',
+ 'morrigan': (['Widely considered the <b>best character in the game</b> — the "Ryu" of Darkstalkers 3.',
+               'Superb all-rounder — fireball, high-priority dragon-punch, air mobility, unbelievable combos.',
+               '<b>Vector Drain</b> is an unblockable grab that leaves almost no recoverable health; '
+               '<b>Valkyrie Turn</b> is an invincible reversal you can combo after.',
+               '<b>Darkness Illusion</b> is a devastating hyper that combos off a jab/short.'],
+              ['Astral-Vision / Valkyrie execution takes work to maximise.',
+               'Finishing Shower hits hardest but is too slow to combo (chip only).']),
+ 'lilith': (['Very <b>fast</b>, agile pressure with great air movement and good defence.',
              'Soul Flash + Shining Blade cover ground and anti-air.',
              'The Mindless-Doll clone enables big doubled-up combos.'],
             ['Low damage per hit — needs combos and the doll to really hurt.',
+             '<b>Short throw range</b> — she loses most throw attempts; win with combos instead.',
              'Frail; lives in the opponent’s face, so a slip is costly.']),
- 'felicia': (['One of the <b>best chain characters</b> in the game — long, easy combos.',
-              'Great speed, OTG game (Toy Touch) and wall/triangle-jump mobility.',
+ 'felicia': (['<b>One of the best combo characters in the game</b> (per DJellybean) — long, easy chains.',
+              'Amazing speed, OTG game (Toy Touch) and wall/triangle-jump mobility.',
+              'Solid defence — cr.HP / close st.HK anti-air, and Buckler-uppercut / Delta Kick out-prioritize.',
               '<b>EX Charge</b> lets her bank meter for free.'],
              ['Low damage / frail — she has to combo to win.',
-              'No real projectile zoning; must get in.']),
+              'No projectile zoning; must get in.']),
 }
 
 # ============================================================ strategy (per character)
@@ -249,22 +267,35 @@ STRATEGY = {
     'then convert into a chain.'),
    ('Cash it in', 'Confirm any chain into <b>Cool Hunting</b>, or end in <b>Sentimental Typhoon → ES Pursuit</b> '
     'in the corner for max damage.'),
+   ('Up close', 'Her priority is low and <b>Cheer &amp; Fire</b> is a poor anti-air — if they get in, '
+    '<b>throw</b> them and reset to range rather than trading. She’s a zoner, not a combo character.'),
  ],
  'morrigan': [
+   ('Play the "Ryu"', 'DJellybean calls her the best character in the game — a shoto with an excellent '
+    'fireball and a high-priority dragon-punch. Play offense and let your fundamentals win.'),
    ('Control the air', 'Flying dash + air <b>Soul Fist</b> let you approach safely; <b>Valkyrie Turn</b> '
-    'is invincible to escape pressure.'),
-   ('Open them up', 'Tick into <b>Vector Drain</b> (command throw) against blockers; chain into Shadow Blade '
-    'on hit.'),
-   ('Astral Vision', 'Pop the mirror when you’ve got Chi — every chain hits twice for huge damage.'),
+    'is <b>invincible</b> on start-up — a reversal you can combo <i>after</i> for real damage.'),
+   ('Open them up', 'Tick into <b>Vector Drain</b> — it’s an unblockable grab that leaves almost no '
+    'recoverable (white) health. On a hit, chain into Shadow Blade.'),
+   ('Save Finishing Shower for chip', 'It’s her hardest-hitting super but far too slow to combo into — use it '
+    'as block-damage when they’re low, not as a combo ender.'),
+   ('Astral Vision', 'Pop the mirror when you’ve got Chi — every chain hits twice; Valkyrie Turn loops become '
+    'huge damage.'),
  ],
  'lilith': [
-   ('Stay in their face', 'Use her speed and air dashes to keep pressure; Soul Flash covers your approach.'),
+   ('Stay in their face', 'Quick and agile with good defence and a potent offense — keep pressure on; Soul '
+    'Flash covers your approach. <b>High Jump</b> over keep-away opponents to force your way in.'),
    ('Anti-air', '<b>Shining Blade</b> swats jump-ins; <b>Merry Turn</b> for knockdowns.'),
+   ('Don’t fish for throws', 'Her throw range is short and usually loses the priority fight — win with combos '
+    'and the doll, not throws.'),
    ('Doll combos', 'Mindless Doll doubles your chains — the key to her damage.'),
  ],
  'felicia': [
    ('Get in &amp; chain', 'No projectile, so close with dashes, the wall-jump and <b>Rolling Buckler</b>, then '
-    'run her long chains.'),
+    'run her long chains. DJellybean rates her one of the best combo characters in the game — play '
+    'pure offense and don’t sit back.'),
+   ('Anti-air', 'When they jump in, use <b>cr.HP</b> or a close <b>st.HK</b>; the Rolling-Buckler uppercut '
+    'and <b>Delta Kick</b> out-prioritize most air attacks.'),
    ('OTG game', 'End combos in <b>Delta Kick</b>, then <b>Toy Touch</b> / Pursuit for free OTG damage.'),
    ('Bank meter', 'Use <b>EX Charge</b> in down-time to stock up for Dancing Flash / Please Help Me.'),
  ],

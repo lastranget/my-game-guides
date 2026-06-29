@@ -66,8 +66,10 @@
       "run": "python3 tools/build_kof.py",
       "sources": ["GameFAQs KOF XI FAQs 44220 (B. Jenet), 44141 (system/movelist)"]
     },
-    "guides/garou/garou-terry.html": { "builder": null, "note": "Hand-authored (predates the toolchain)." },
-    "guides/garou/garou-b-jenet.html": { "builder": null, "note": "Hand-authored (predates the toolchain)." },
+    "guides/garou/garou-terry.html": { "builder": null, "note": "Hand-authored beginner guide (predates the toolchain)." },
+    "guides/garou/garou-b-jenet.html": { "builder": null, "note": "Hand-authored beginner guide (predates the toolchain)." },
+    "guides/garou/garou-terry-combos.html": { "builder": "tools/build_garou.py", "data": ["tools/garou_data.py", "tools/refs_garou.py"], "run": "python3 tools/build_garou.py", "sources": ["Garou FAQs 6097 (JKuroki), 7828 (MGA combos), 14695 (Shirow Terry), 8673 (ghoward Terry)"] },
+    "guides/garou/garou-b-jenet-combos.html": { "builder": "tools/build_garou.py", "data": ["tools/garou_data.py", "tools/refs_garou.py"], "run": "python3 tools/build_garou.py", "sources": ["Garou FAQs 6097 (JKuroki), 7828 (MGA combos), 14967 (TalbainEric B.Jenet)"] },
     "guides/tetris/*": { "builder": null, "note": "PORT-mode scrape of four.lol; built ad-hoc, scraper not retained in this repo." }
   }
 }

@@ -14,6 +14,9 @@ BTN = {
     'A1': ('#6c7079', '#ffffff', 14), 'A2': ('#6c7079', '#ffffff', 14),
     # 6-button games (Vampire Savior): mediums sit on grey shoulders
     'MP': ('#6c7079', '#ffffff', 14), 'MK': ('#6c7079', '#ffffff', 14),
+    # SNK A/B/C/D buttons (KOF, Garou): A=light punch, B=light kick, C=hard punch, D=hard kick
+    'A': ('#2fb84a', '#ffffff', 14), 'B': ('#f2c531', '#1a1505', 14),
+    'C': ('#2f86f0', '#ffffff', 14), 'D': ('#ec3b3b', '#ffffff', 14),
 }
 GRAD = {'P': 'gp', 'PP': 'gp', 'K': 'gk', 'KK': 'gk'}
 
