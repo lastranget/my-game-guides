@@ -12,6 +12,8 @@ BTN = {
     'LP': ('#2fb84a', '#ffffff', 14), 'HP': ('#2f86f0', '#ffffff', 14),
     'LK': ('#f2c531', '#1a1505', 14), 'HK': ('#ec3b3b', '#ffffff', 14),
     'A1': ('#6c7079', '#ffffff', 14), 'A2': ('#6c7079', '#ffffff', 14),
+    # 6-button games (Vampire Savior): mediums sit on grey shoulders
+    'MP': ('#6c7079', '#ffffff', 14), 'MK': ('#6c7079', '#ffffff', 14),
 }
 GRAD = {'P': 'gp', 'PP': 'gp', 'K': 'gk', 'KK': 'gk'}
 
