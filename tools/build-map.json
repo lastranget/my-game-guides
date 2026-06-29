@@ -40,14 +40,10 @@
       "run": "python3 tools/build_fcs.py",
       "sources": ["same FAQs; Storm matchups from 23122 (condensed)"]
     },
-    "guides/vsavior/vsavior-bbhood.html": { "builder": "tools/build_vs.py (build_main)", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "sources": ["Vampire Savior FAQs 5283/7976/1237; B.B. Hood 1243/1242"] },
-    "guides/vsavior/vsavior-bbhood-combos.html": { "builder": "tools/build_vs.py (build_combos)", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "sources": ["same; combos from afroshouji 1243"] },
-    "guides/vsavior/vsavior-morrigan.html": { "builder": "tools/build_vs.py (build_main)", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "sources": ["VS FAQs 5283/7976/1237; Morrigan 1248"] },
-    "guides/vsavior/vsavior-morrigan-combos.html": { "builder": "tools/build_vs.py (build_combos)", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "sources": ["same; combos authored from chain system + movelist"] },
-    "guides/vsavior/vsavior-lilith.html": { "builder": "tools/build_vs.py (build_main)", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "sources": ["VS FAQs 5283/7976/1237; Lilith 1247"] },
-    "guides/vsavior/vsavior-lilith-combos.html": { "builder": "tools/build_vs.py (build_combos)", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "sources": ["same; combos authored from chain system + movelist"] },
-    "guides/vsavior/vsavior-felicia.html": { "builder": "tools/build_vs.py (build_main)", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "sources": ["VS full-game FAQs 5283/7976/1237 (no dedicated Felicia FAQ)"] },
-    "guides/vsavior/vsavior-felicia-combos.html": { "builder": "tools/build_vs.py (build_combos)", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "sources": ["same; combos authored from chain system + movelist"] },
+    "guides/vsavior/vsavior-bbhood.html": { "builder": "tools/build_vs.py", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "note": "Single combined guide (beginner + advanced + all combos).", "sources": ["Vampire Savior FAQs 5283/7976/1237; B.B. Hood 1243/1242"] },
+    "guides/vsavior/vsavior-morrigan.html": { "builder": "tools/build_vs.py", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "note": "Single combined guide.", "sources": ["VS FAQs 5283/7976/1237; Morrigan 1248"] },
+    "guides/vsavior/vsavior-lilith.html": { "builder": "tools/build_vs.py", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "note": "Single combined guide.", "sources": ["VS FAQs 5283/7976/1237; Lilith 1247"] },
+    "guides/vsavior/vsavior-felicia.html": { "builder": "tools/build_vs.py", "data": ["tools/vs_data.py", "tools/refs_vs.py"], "run": "python3 tools/build_vs.py", "note": "Single combined guide.", "sources": ["VS full-game FAQs 5283/7976/1237 (no dedicated Felicia FAQ)"] },
     "guides/kofxi/kofxi-terry.html": {
       "builder": "tools/build_kof.py",
       "data": ["tools/chardata.py", "tools/refs_kof.py"],

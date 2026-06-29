@@ -32,10 +32,12 @@ are and what each must contain.**
 > [!tip] Variants — adapt the set to the game
 > The three-guide split is the default, but match it to the subject:
 > - **1-on-1 game (no team), per-character** (e.g. Vampire Savior — B.B. Hood / Morrigan / Lilith /
->   Felicia): the advanced material is thinner (no assists/DHC), so **combine beginner + advanced into
->   one guide** and keep a **separate combos guide** — i.e. *two* files per character
->   (`vsavior-<char>.html` + `vsavior-<char>-combos.html`). Drop the team sections; the "system
->   overview" still teaches the whole game.
+>   Felicia): the advanced material is thinner (no assists/DHC), so **combine beginner + advanced**
+>   into one guide. Drop the team sections; the "system overview" still teaches the whole game. **If
+>   the per-section content is short, fold the combos in too** — one self-contained `vsavior-<char>.html`
+>   per character (the VS set ended up as a single file each: system → strengths/weaknesses → movelist
+>   → strategy → combos-by-use-case → combo screens → one-screen specials → references). Split into a
+>   separate `-combos.html` only when the combo list is big enough to warrant its own file.
 > - **6-button games** (Vampire Savior: LP/MP/HP, LK/MK/HK): keep the established colours — light/hard
 >   punch = green/blue, light/hard kick = yellow/red on the face buttons — and put the **mediums (MP/MK)
 >   on the grey shoulders** (`gen.py` has `MP`/`MK` keycaps). KOF's blowback `E` is likewise grey.

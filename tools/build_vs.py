@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Build Vampire Savior character guides — two per character:
-  vsavior-<char>.html         : beginner + advanced combined
-  vsavior-<char>-combos.html  : full combos + single-screen practice cards
+"""Build Vampire Savior character guides — ONE combined guide per character
+(vsavior-<char>.html): beginner + advanced + every combo + single-screen cards.
+(The content was short enough that the split beginner/combo files were merged.)
 Reuses gen.py (6-button glyphs) + style.css + app.js. Data in vs_data.py."""
 import os as _os
 _HERE = _os.path.dirname(_os.path.abspath(__file__))
@@ -210,52 +210,38 @@ def how_section(combo=False):
             f'motion tokens. Difficulty is <span class="diff">●○○</span>–<span class="diff">●●●</span>.</p>'
             f'{button_legend()}{notation_ledger()}</section>')
 
-def build_main(ch):
+def build_one(ch):
+    """One self-contained guide per character: beginner + advanced + all combos."""
     css = open(_os.path.join(_HERE, 'style.css')).read()
     m = META[ch]
+    screens, n = combo_screens(ch)
     toc = ('<nav id="toc"><div class="toc-head"><h2>Contents</h2></div><ul class="toc-top">'
            '<li><a href="#how">How to read this guide</a></li>'
            '<li><a href="#system">How Vampire Savior works</a></li>'
            '<li><a href="#sw">Strengths &amp; weaknesses</a></li>'
            '<li><a href="#moves">Movelist — full reference</a></li>'
            '<li><a href="#strategy">Strategy &amp; game plan</a></li>'
+           '<li><a href="#combos">Combos — by use-case</a></li>'
+           f'<li><a href="#screens-combos">Combo screens (×{n})</a></li>'
            '<li><a href="#moves-1">Special moves (one screen)</a></li>'
            '<li><a href="#refs">References &amp; sources</a></li></ul></nav>')
     body = (header_bar(f'Vampire Savior — {m["name"]}')
             + f'<div class="wrap"><h1>{m["name"]} ({m["long"]}) — Vampire Savior guide</h1>'
-            f'<p class="intro">A beginner-to-advanced guide for <b>{m["name"]}</b> in <b>Vampire Savior: '
-            f'The Lord of Vampire</b> (Darkstalkers 3) — controls, the full movelist, strengths and a game '
-            f'plan. Combos live in the companion <i>{m["name"]} combos</i> guide.</p>'
-            f'{toc}{how_section()}{system_section()}{sw_section(ch)}{movelist_section(ch)}'
-            f'{strategy_section(ch)}{onescreen_section(ch)}{references_section(ch)}'
-            f'</div>{TOTOP}{script_tag()}')
+            f'<p class="intro">A complete guide for <b>{m["name"]}</b> in <b>Vampire Savior: The Lord of '
+            f'Vampire</b> (Darkstalkers 3) — controls, the full movelist, strengths, a game plan, and '
+            f'<b>every combo</b> with single-screen practice cards for your AYN&nbsp;Thor.</p>'
+            f'{toc}{how_section(combo=True)}{system_section()}{sw_section(ch)}{movelist_section(ch)}'
+            f'{strategy_section(ch)}{detailed_combos(ch)}{screens}{onescreen_section(ch)}'
+            f'{references_section(ch)}</div>{TOTOP}{script_tag()}')
     out = _os.path.join(_REPO, 'guides', 'vsavior', f'vsavior-{ch}.html')
     _os.makedirs(_os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(head_doc(f'Vampire Savior — {m["name"]} (guide)', css, body))
-    print('wrote', out)
-
-def build_combos(ch):
-    css = open(_os.path.join(_HERE, 'style.css')).read()
-    m = META[ch]
-    screens, n = combo_screens(ch)
-    toc = ('<nav id="toc"><div class="toc-head"><h2>Contents</h2></div><ul class="toc-top">'
-           '<li><a href="#how">How to read these combos</a></li>'
-           '<li><a href="#combos">All combos by use-case</a></li>'
-           f'<li><a href="#screens-combos">Combo screens (×{n})</a></li>'
-           '<li><a href="#moves-1">Special moves (one screen)</a></li>'
-           '<li><a href="#refs">References &amp; sources</a></li></ul></nav>')
-    body = (header_bar(f'VS Combos — {m["name"]}')
-            + f'<div class="wrap"><h1>{m["name"]} — combo dojo</h1>'
-            f'<p class="intro">Every combo for <b>{m["name"]}</b>, grouped by use-case with reference IDs, '
-            f'plus single-screen practice cards for your AYN&nbsp;Thor.</p>'
-            f'{toc}{how_section(combo=True)}{detailed_combos(ch)}{screens}{onescreen_section(ch)}'
-            f'{references_section(ch)}</div>{TOTOP}{script_tag()}')
-    out = _os.path.join(_REPO, 'guides', 'vsavior', f'vsavior-{ch}-combos.html')
-    _os.makedirs(_os.path.dirname(out), exist_ok=True)
-    open(out, 'w').write(head_doc(f'Vampire Savior — {m["name"]} (combos)', css, body))
-    print('wrote', out, f'({len(COMBOS[ch])} combos, {n} screens)')
+    print('wrote', out, f'({len(COMBOS[ch])} combos, {n} combo screens)')
 
 if __name__ == '__main__':
+    import glob as _glob
+    # remove the old split combo files — content now lives in the single per-character guide
+    for _f in _glob.glob(_os.path.join(_REPO, 'guides', 'vsavior', 'vsavior-*-combos.html')):
+        _os.remove(_f)
     for ch in ORDER:
-        build_main(ch)
-        build_combos(ch)
+        build_one(ch)

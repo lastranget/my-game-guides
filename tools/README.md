@@ -21,8 +21,7 @@ The authoritative mapping is **`build-map.json`** (machine-readable). Human summ
 | `mvc2/…-felicia-cyclops-storm.html` (beginner) | `build_fcs.py` | `fcs_data.py`, `fcs_text.py`, `refs_fcs.py` | MvC2 FAQs 7414/8530/7893/7945/9838/23122/8320/8321/8330 |
 | `mvc2/…-felicia-cyclops-storm-combos.html` | `build_fcs.py` | `fcs_data.py`, `refs_fcs.py` | same Felicia/Cyclops/Storm FAQs |
 | `mvc2/…-felicia-cyclops-storm-advanced.html` | `build_fcs.py` | `fcs_text.py`, `storm_matchups.py`, `refs_fcs.py` | same FAQs |
-| `vsavior/vsavior-<char>.html` (beginner+advanced) | `build_vs.py` | `vs_data.py`, `refs_vs.py` | Vampire Savior FAQs 5283/7976/1237 + per-char 1243/1248/1247 |
-| `vsavior/vsavior-<char>-combos.html` | `build_vs.py` | `vs_data.py`, `refs_vs.py` | same |
+| `vsavior/vsavior-<char>.html` (one combined guide: beginner + advanced + combos) | `build_vs.py` | `vs_data.py`, `refs_vs.py` | Vampire Savior FAQs 5283/7976/1237 + per-char 1243/1248/1247 |
 | `garou/garou-{terry,b-jenet}-combos.html` | `build_garou.py` | `garou_data.py`, `refs_garou.py` | Garou FAQs 6097/7828/14695/8673/14967 |
 | `kofxi/kofxi-terry.html` | `build_kof.py` | `chardata.py`, `refs_kof.py` | KOF XI FAQs 45250, 44141 |
 | `kofxi/kofxi-athena.html` | `build_kof.py` | `chardata.py`, `athena_matchups.py` | KOF XI FAQs 51436, 44141 |
@@ -50,7 +49,7 @@ The authoritative mapping is **`build-map.json`** (machine-readable). Human summ
 - `refs_fcs.py` — the shared "References & sources" section for the Felicia/Cyclops/Storm set.
 
 **Vampire Savior / Darkstalkers 3 — B.B. Hood / Morrigan / Lilith / Felicia** (6-button game)
-- `build_vs.py` — builds **two guides per character**: a combined beginner+advanced guide and a separate combos guide (8 files). `python3 tools/build_vs.py`
+- `build_vs.py` — builds **one combined guide per character** (4 files): beginner + advanced + every combo + single-screen cards in a single HTML file. `python3 tools/build_vs.py`
 - `vs_data.py` — movelists, combos (piece-lists), strengths/weaknesses and strategy for the four characters.
 - `refs_vs.py` — the shared "References & sources" section for the VS set.
   (`gen.py` carries the extra `MP`/`MK` grey medium-attack keycaps these 6-button guides need.)
