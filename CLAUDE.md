@@ -16,12 +16,16 @@ HTML game guides** plus a browsable index, deployed as a GitHub Pages site
   `…-advanced.html` (strategy). They stay standalone (reference siblings by **plain-text filename**,
   never a link) and each carries a **"References & sources"** section citing the source FAQs
   (external `http(s)` citation links are allowed; cross-*file* `.html` links are not).
-- **`instructions/`** — the authoring playbook
-  (`Scraping a Website into a Single Self-Contained HTML File.md`). It is the **style guide and
-  process** every guide follows: PORT vs AGGREGATE modes, the headless-Chromium scraping/extraction
-  flow, the OLED-black AYN Thor visual style (palette, collapsible TOC, overflow guards,
-  auto-hide chrome), validation steps, and the fighting-game input glyphs. **Read it before
-  creating or editing a guide**, and keep new guides consistent with it.
+- **`instructions/`** — the authoring playbooks. **`Scraping a Website into a Single Self-Contained
+  HTML File.md`** is the core **style guide and process** every guide follows: PORT vs AGGREGATE
+  modes, the headless-Chromium scraping/extraction flow (incl. the Cloudflare→Wayback bypass for
+  GameFAQs), the OLED-black AYN Thor visual style (palette, collapsible TOC, overflow guards,
+  auto-hide chrome), validation steps, and the fighting-game input glyphs. **`Fighting-game guide
+  sets — beginner, combo, advanced.md`** specifies the **three-guide companion-set format** for a
+  fighting-game character/team — what the beginner / combo-dojo / advanced guides must each contain,
+  and the **single-screen-view rules** (per-character special-move cards, the wide-screen trio, and
+  the paginated combo practice cards + their ≤418px fit budget). **Read both before creating or
+  editing a fighting-game guide**, and keep new guides consistent with them.
 - **`docs/`** — internal design notes. **`input-notation.md`** is the **canonical fighting-game
   input-notation scheme**: facing-relative text tokens (`QCF`, `DP`, `[B]F`, `F-DF-D`…) that
   replaced the old directional arrows (arrows are only correct while a character faces right).

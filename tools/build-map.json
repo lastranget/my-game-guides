@@ -22,6 +22,24 @@
       "run": "python3 tools/build3.py",
       "sources": ["GameFAQs MvC2 FAQs 7669, 22878, 8517, 8318, 7893, 7945, 9838"]
     },
+    "guides/mvc2/mvc2-felicia-cyclops-storm.html": {
+      "builder": "tools/build_fcs.py (build_beginner)",
+      "data": ["tools/fcs_data.py", "tools/fcs_text.py", "tools/refs_fcs.py"],
+      "run": "python3 tools/build_fcs.py",
+      "sources": ["GameFAQs MvC2 FAQs 7414, 8530 (Felicia); 7893, 7945, 9838 (Cyclops); 23122, 8320, 8321, 8330 (Storm)"]
+    },
+    "guides/mvc2/mvc2-felicia-cyclops-storm-combos.html": {
+      "builder": "tools/build_fcs.py (build_combo)",
+      "data": ["tools/fcs_data.py", "tools/refs_fcs.py"],
+      "run": "python3 tools/build_fcs.py",
+      "sources": ["same Felicia/Cyclops/Storm FAQs"]
+    },
+    "guides/mvc2/mvc2-felicia-cyclops-storm-advanced.html": {
+      "builder": "tools/build_fcs.py (build_advanced)",
+      "data": ["tools/fcs_text.py", "tools/storm_matchups.py", "tools/refs_fcs.py"],
+      "run": "python3 tools/build_fcs.py",
+      "sources": ["same FAQs; Storm matchups from 23122 (condensed)"]
+    },
     "guides/kofxi/kofxi-terry.html": {
       "builder": "tools/build_kof.py",
       "data": ["tools/chardata.py", "tools/refs_kof.py"],

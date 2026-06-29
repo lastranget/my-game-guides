@@ -71,6 +71,8 @@ def TAG(t):         return ('tag', t)                   # descriptor glued to PR
 
 def _sp_input(m, b, air):
     pre = 'air ' if air else ''
+    if not b:                       # button baked into the motion string (e.g. "HP+LK")
+        return f'{pre}{m}'
     if m.startswith('['):          # charge motion
         return f'{pre}charge {m} + {b}'
     return f'{pre}{m} + {b}'

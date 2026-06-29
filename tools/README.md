@@ -18,6 +18,9 @@ The authoritative mapping is **`build-map.json`** (machine-readable). Human summ
 | `mvc2/…-cammy-morrigan-cyclops.html` | — *hand-authored* | — | MvC2 FAQs |
 | `mvc2/…-cammy-bbhood-cyclops-combos.html` | `build.py` | `data.py`, `refs.py` | MvC2 FAQs 7669/22878/8517/8318/7893/7945/9838 |
 | `mvc2/…-cammy-bbhood-cyclops-advanced.html` | `build3.py` | `refs.py` | same MvC2 FAQs |
+| `mvc2/…-felicia-cyclops-storm.html` (beginner) | `build_fcs.py` | `fcs_data.py`, `fcs_text.py`, `refs_fcs.py` | MvC2 FAQs 7414/8530/7893/7945/9838/23122/8320/8321/8330 |
+| `mvc2/…-felicia-cyclops-storm-combos.html` | `build_fcs.py` | `fcs_data.py`, `refs_fcs.py` | same Felicia/Cyclops/Storm FAQs |
+| `mvc2/…-felicia-cyclops-storm-advanced.html` | `build_fcs.py` | `fcs_text.py`, `storm_matchups.py`, `refs_fcs.py` | same FAQs |
 | `kofxi/kofxi-terry.html` | `build_kof.py` | `chardata.py`, `refs_kof.py` | KOF XI FAQs 45250, 44141 |
 | `kofxi/kofxi-athena.html` | `build_kof.py` | `chardata.py`, `athena_matchups.py` | KOF XI FAQs 51436, 44141 |
 | `kofxi/kofxi-bjenet.html` | `build_kof.py` | `chardata.py`, `bjenet_combos.py` | KOF XI FAQs 44220, 44141 |
@@ -36,7 +39,12 @@ The authoritative mapping is **`build-map.json`** (machine-readable). Human summ
 - `build.py` — the **combo dojo** guide. `python3 tools/build.py`
 - `build3.py` — the **advanced/strategy** guide. `python3 tools/build3.py`
 - `data.py` — the MvC2 combo dataset (use-case groups + IDs).
-- `refs.py` — the shared "References & sources" section for the MvC2 set.
+- `refs.py` — the shared "References & sources" section for the Cammy/BB Hood/Cyclops set.
+- `build_fcs.py` — builds all three **Felicia / Cyclops / Storm** guides (beginner, combo, advanced). `python3 tools/build_fcs.py`
+- `fcs_data.py` — combos (piece-lists, grouped + IDs), movelists and one-screen data for that team.
+- `fcs_text.py` — the prose sections (team plan, learning path, strengths/weaknesses, assists, neutral, defense, meter/DHC, mind-games, matchups, mistakes).
+- `storm_matchups.py` — auto-generated Storm matchup chart (from FAQ 23122, condensed).
+- `refs_fcs.py` — the shared "References & sources" section for the Felicia/Cyclops/Storm set.
 
 **KOF XI — Athena / Terry / B. Jenet**
 - `build_kof.py` — builds all three KOF guides. `python3 tools/build_kof.py`
